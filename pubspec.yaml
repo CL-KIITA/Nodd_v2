@@ -7,7 +7,4 @@ dependencies:
   nyxx: ^2.0.5
   nyxx_interactions: ^2.0.2
 dev_dependencies:
-  dp_common_dart_linters:
-    git:
-      url: https://github.com/DevelopersPackages-org/dp_common_linters
-      path: Dart_Linters
+  flutter_lints: ^1.0.4
