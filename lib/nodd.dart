@@ -175,7 +175,6 @@ void main(List<String> args) {
 
           bool strict = false;
           if (event.args.any((InteractionOption element) => element.name == "only_mentioned")) {
-            strict = bool.parse(event.getArg("only_mentioned").value.toString());
           }
           String content = "";
           if (event.args.any((InteractionOption element) => element.name == "mention_r")) {
@@ -200,6 +199,7 @@ void main(List<String> args) {
             enbeds.imageUrl = event.getArg("image").value.toString();
           }
           event.respond(MessageBuilder.enbed(enbeds));
+          strict = event.getArg("only_mentioned") as bool;
       }))
     ..syncOnReady();
   final Map<String, String> prefixes = {
