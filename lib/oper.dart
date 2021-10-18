@@ -29,5 +29,5 @@ class ParamSet {
 }
 
 mixin ParamReq {
-  late ParamSet _param:
+  late ParamSet _param;
 }
