@@ -86,7 +86,8 @@ void main(List<String> args) {
           await author.edit(nick: newNick);
           event.respond(MessageBuilder.content("あなたのニックネームを $newNick に変更しました"));
         }
-      ..registerSlashCommand(SlashCommandBuilder(
+      }))
+    ..registerSlashCommand(SlashCommandBuilder(
         "poll",
         "投票を開始します。",
         [
