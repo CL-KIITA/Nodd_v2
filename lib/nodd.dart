@@ -1,3 +1,7 @@
+// ignore_for_file: unused_local_variable, unnecessary_brace_in_string_interps, prefer_const_declarations, avoid_print, avoid_shadowing_type_parameters, slash_for_doc_comments
+// ignore: todo
+// TODO: Delete ignore_for_file
+
 import "package:nyxx/nyxx.dart";
 import "dart:io" show Platform, exit, sleep;
 

@@ -1,3 +1,7 @@
+// ignore_for_file: constant_identifier_names, unused_field, non_constant_identifier_names
+// ignore: todo
+// TODO: Delete ignore_for_file
+
 class MacroType {
   static const TypeAtom Number = TypeAtom.Number;
   static const TypeAtom Bool = TypeAtom.Bool;
