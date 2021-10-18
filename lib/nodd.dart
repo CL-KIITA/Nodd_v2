@@ -91,8 +91,7 @@ void main(List<String> args) {
         "poll",
         "投票を開始します。",
         [
-          CommandOptionBuilder(
-              CommandOptionType.string, "title", "投票のタイトル",
+          CommandOptionBuilder(CommandOptionType.string, "title", "投票のタイトル",
               required: false),
           CommandOptionBuilder(
               CommandOptionType.role, "mention_r", "投票のためのメンション(ロール)",
@@ -100,14 +99,12 @@ void main(List<String> args) {
           CommandOptionBuilder(
               CommandOptionType.user, "mention_m", "投票のためのメンション(メンバ)",
               required: false),
-          CommandOptionBuilder(
-              CommandOptionType.boolean, "only_mentioned", "投票可能な人をメンションした人に制限するかどうか",
+          CommandOptionBuilder(CommandOptionType.boolean, "only_mentioned",
+              "投票可能な人をメンションした人に制限するかどうか",
               required: false),
-          CommandOptionBuilder(
-              CommandOptionType.string, "content", "投票の内容",
+          CommandOptionBuilder(CommandOptionType.string, "content", "投票の内容",
               required: true),
-          CommandOptionBuilder(
-              CommandOptionType.string, "image", "投票につける画像",
+          CommandOptionBuilder(CommandOptionType.string, "image", "投票につける画像",
               required: false),
           CommandOptionBuilder(
               CommandOptionType.integer, "vote_max", "投票可能な最大数(デフォルトは1)",
@@ -138,68 +135,80 @@ void main(List<String> args) {
         ],
         guild: guildId.toSnowflake())
       ..registerHandler((SlashCommandInteractionEvent event) {
-          EnbedBuilder enbeds = EnbedBuilder();
-          late int maxVote;
-          if (event.args.any((InteractionOption element) => element.name == "vote_max")){
-            int temp = int.parse(event.getArg("vote_max").value.toString());
-            if(temp > 0 && temp <= 6){
-              maxVote = temp;
-            }else{
-              maxVote = 1;
-            }
-          }else{
-            maxVote = 1
+        EmbedBuilder enbeds = EmbedBuilder();
+        late int maxVote;
+        if (event.args
+            .any((InteractionOption element) => element.name == "vote_max")) {
+          int temp = int.parse(event.getArg("vote_max").value.toString());
+          if (temp > 0 && temp <= 6) {
+            maxVote = temp;
+          } else {
+            maxVote = 1;
           }
-          List<String> choices = {};
-          int choiceNr = 2;
-          choices.add(event.getArg("choice_1").value.toString());
-          choices.add(event.getArg("choice_2").value.toString());
-          if (event.args.any((InteractionOption element) => element.name == "choice_3")) {
-            choices.add(event.getArg("choice_3").value.toString());
-            choiceNr++;
-          }
-          if (event.args.any((InteractionOption element) => element.name == "choice_4")) {
-            choices.add(event.getArg("choice_4").value.toString());
-            choiceNr++;
-          }
-          if (event.args.any((InteractionOption element) => element.name == "choice_5")) {
-            choices.add(event.getArg("choice_5").value.toString());
-            choiceNr++;
-          }
-          if (event.args.any((InteractionOption element) => element.name == "choice_6")) {
-            choices.add(event.getArg("choice_6").value.toString());
-            choiceNr++;
-          }
-          List<EmbedFieldBuilder> retChoices = choices.indexedMap((int index, String choice)=>EmbedFieldBuilder(index, choice)).toList();
-          enbeds.fields = retChoices;
+        } else {
+          maxVote = 1;
+        }
+        List<String> choices = {} as List<String>;
+        int choiceNr = 2;
+        choices.add(event.getArg("choice_1").value.toString());
+        choices.add(event.getArg("choice_2").value.toString());
+        if (event.args
+            .any((InteractionOption element) => element.name == "choice_3")) {
+          choices.add(event.getArg("choice_3").value.toString());
+          choiceNr++;
+        }
+        if (event.args
+            .any((InteractionOption element) => element.name == "choice_4")) {
+          choices.add(event.getArg("choice_4").value.toString());
+          choiceNr++;
+        }
+        if (event.args
+            .any((InteractionOption element) => element.name == "choice_5")) {
+          choices.add(event.getArg("choice_5").value.toString());
+          choiceNr++;
+        }
+        if (event.args
+            .any((InteractionOption element) => element.name == "choice_6")) {
+          choices.add(event.getArg("choice_6").value.toString());
+          choiceNr++;
+        }
+        List<EmbedFieldBuilder> retChoices = choices
+            .indexedMap(
+                (int index, String choice) => EmbedFieldBuilder(index, choice))
+            .toList();
+        enbeds.fields = retChoices;
 
-          bool strict = false;
-          if (event.args.any((InteractionOption element) => element.name == "only_mentioned")) {
-          }
-          String content = "";
-          if (event.args.any((InteractionOption element) => element.name == "mention_r")) {
-            content += " ";
-            content += event.getArg("mention_r").value.toString();
-          }
-          if (event.args.any((InteractionOption element) => element.name == "mention_m")) {
-            content += " ";
-            content += event.getArg("mention_m").value.toString();
-          }
-          if(content != ""){
-            content += "\n";
-          }
-          content += event.getArg("content").value.toString();
-          enbeds.description = content;
-          final Member author = event.interaction.memberAuthor!;
-          EmbedAuthorBuilder authorR = EmbedAuthorBuilder();
-          authorR.iconUrl = author.avatarURL()!;
-          authorR.name = author.nickname!;
-          enbeds.author = authorR;
-          if (event.args.any((InteractionOption element) => element.name == "image")) {
-            enbeds.imageUrl = event.getArg("image").value.toString();
-          }
-          event.respond(MessageBuilder.enbed(enbeds));
+        bool strict = false;
+        if (event.args.any(
+            (InteractionOption element) => element.name == "only_mentioned")) {
           strict = event.getArg("only_mentioned") as bool;
+        }
+        String content = "";
+        if (event.args
+            .any((InteractionOption element) => element.name == "mention_r")) {
+          content += " ";
+          content += event.getArg("mention_r").value.toString();
+        }
+        if (event.args
+            .any((InteractionOption element) => element.name == "mention_m")) {
+          content += " ";
+          content += event.getArg("mention_m").value.toString();
+        }
+        if (content != "") {
+          content += "\n";
+        }
+        content += event.getArg("content").value.toString();
+        enbeds.description = content;
+        final Member author = event.interaction.memberAuthor!;
+        EmbedAuthorBuilder authorR = EmbedAuthorBuilder();
+        authorR.iconUrl = author.avatarURL()!;
+        authorR.name = author.nickname!;
+        enbeds.author = authorR;
+        if (event.args
+            .any((InteractionOption element) => element.name == "image")) {
+          enbeds.imageUrl = event.getArg("image").value.toString();
+        }
+        event.respond(MessageBuilder.embed(enbeds));
       }))
     ..syncOnReady();
   final Map<String, String> prefixes = {
@@ -208,7 +217,8 @@ void main(List<String> args) {
     "dl": "\$",
   };
   final String prefixKey = "ps";
-  final String prefix = prefixes.containsKey(prefixKey) ? prefixes[prefixKey]! : "";
+  final String prefix =
+      prefixes.containsKey(prefixKey) ? prefixes[prefixKey]! : "";
 
   bot.onReady.listen((ReadyEvent e) {
     print("Ready!");
@@ -223,16 +233,15 @@ void main(List<String> args) {
           commandThis.startsWith("kill")) {
         IMessageAuthor at = event.message.author;
         String tag = at.tag;
-        if(tag == "thd：佐藤陽花#7369" ||
-           tag == "skytomo#9913"){
+        if (tag == "thd：佐藤陽花#7369" || tag == "skytomo#9913") {
           event.message.channel
-            .sendMessage(MessageBuilder.content("Nodd System Shutdown."));
+              .sendMessage(MessageBuilder.content("Nodd System Shutdown."));
           print("Nodd System Shutdown.");
           sleep(const Duration(seconds: 6));
           exit(0);
-        }else{
-          event.message.channel
-            .sendMessage(MessageBuilder.content("Noddシステムをシャットダウンする権限がありません。"));
+        } else {
+          event.message.channel.sendMessage(
+              MessageBuilder.content("Noddシステムをシャットダウンする権限がありません。"));
         }
       } else {
         event.message.channel
@@ -244,6 +253,7 @@ void main(List<String> args) {
     print(event.message.content);
   });
 }
+
 extension IndexedMap<T, E> on List<T> {
   List<E> indexedMap<E>(E Function(int index, T item) function) {
     final list = <E>[];
