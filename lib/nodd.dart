@@ -114,25 +114,26 @@ void main(List<String> args) {
               required: false),
           CommandOptionBuilder(
               CommandOptionType.subCommandGroup, "choice", "投票の選択肢",
-              opions:
+              options: [
                 CommandOptionBuilder(
-                  CommandOptionType.string, "choice_1", "選択肢1",
-                  required: true),
+                    CommandOptionType.string, "choice_1", "選択肢1",
+                    required: true),
                 CommandOptionBuilder(
-                  CommandOptionType.string, "choice_2", "選択肢2",
-                  required: true),
+                    CommandOptionType.string, "choice_2", "選択肢2",
+                    required: true),
                 CommandOptionBuilder(
-                  CommandOptionType.string, "choice_3", "選択肢3",
-                  required: false),
+                    CommandOptionType.string, "choice_3", "選択肢3",
+                    required: false),
                 CommandOptionBuilder(
-                  CommandOptionType.string, "choice_4", "選択肢4",
-                  required: false),
+                    CommandOptionType.string, "choice_4", "選択肢4",
+                    required: false),
                 CommandOptionBuilder(
-                  CommandOptionType.string, "choice_5", "選択肢5",
-                  required: false),
+                    CommandOptionType.string, "choice_5", "選択肢5",
+                    required: false),
                 CommandOptionBuilder(
-                  CommandOptionType.string, "choice_6", "選択肢6",
-                  required: false),
+                    CommandOptionType.string, "choice_6", "選択肢6",
+                    required: false),
+              ],
               required: true),
         ],
         guild: guildId.toSnowflake())
