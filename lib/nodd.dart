@@ -32,13 +32,13 @@ some:unbind>{el1,el2,el3}
 
  */
 void main(List<String> args) {
-  final Map<String,String> envVars = Platform.environment;
-  final String token = envVars["DISCORD_NODD_BOT_TOKEN"];
+  final Map<String, String> envVars = Platform.environment;
+  final String? token = envVars["DISCORD_NODD_BOT_TOKEN"];
   if (token == null) {
     throw Exception(
         "Token is not difined. Please set `export DISCORD_NODD_BOT_TOKEN=<TOKEN>`");
   }
-  final String guildId = envVars["DISCORD_NODD_GUILD_ID"];
+  final String? guildId = envVars["DISCORD_NODD_GUILD_ID"];
   if (guildId == null) {
     throw Exception(
         "Guild ID is not difined. Please set `export DISCORD_NODD_GUILD_ID=<GUILD ID>`");
