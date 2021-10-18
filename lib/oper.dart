@@ -8,6 +8,7 @@ enum TypeAtom {
   Bool,
 }
 
+/* FIXME:
 extension TypeCallAtom on MacroType {
   @override
   String toString() {
@@ -19,6 +20,7 @@ extension TypeCallAtom on MacroType {
     }
   }
 }
+*/
 
 class ParamSet {
   late MacroType _type;
