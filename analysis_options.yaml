@@ -1,1 +1,2 @@
+# TODO: Replace to package:dp_common_dart_linters/default.yaml
 include: package:flutter_lints/flutter.yaml
