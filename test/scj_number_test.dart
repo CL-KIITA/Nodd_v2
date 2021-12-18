@@ -7,18 +7,12 @@ import 'package:pointycastle/pointycastle.dart';
 // ignore: implementation_imports
 import "package:pointycastle/src/utils.dart";
 
-// See https://github.com/bcgit/pc-dart/blob/master/test/test/src/helpers.dart#L63-L73
-Uint8List createUint8ListFromHexString(String hex) {
-  hex = hex.replaceAll(RegExp(r'\s'), ''); // remove all whitespace, if any
-
-  var result = Uint8List(hex.length ~/ 2);
-  for (var i = 0; i < hex.length; i += 2) {
-    var num = hex.substring(i, i + 2);
-    var byte = int.parse(num, radix: 16);
-    result[i ~/ 2] = byte;
-  }
-  return result;
-}
+Uint8List createUint8ListFromHexString(String hex) =>
+    Uint8List.fromList(RegExp("(..)")
+        .allMatches(hex)
+        .map((match) => match.group(0))
+        .map((byte) => int.parse(byte!, radix: 16))
+        .toList());
 
 void main() {
   group('Convert ID to Uint8List', () {
